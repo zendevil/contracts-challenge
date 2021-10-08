@@ -17,24 +17,30 @@ contract ETHPool {
 
    }
 
+   event Deposit(address sender, uint value);
    function deposit() public payable {
        _deposits[msg.sender] += msg.value;
+       emit Deposit(msg.sender, msg.value);
        if (!listContains(poolMembers, msg.sender)) {
            poolMembers.push(msg.sender);
        }
    }
 
+   event WithdrawDeposit(address sender, uint value);
    function withdrawDeposit(uint amount) public {
        require(_deposits[msg.sender] > amount);
        _deposits[msg.sender] -= amount;
+       emit WithdrawDeposit(msg.sender, amount);
        (bool success, ) = payable(msg.sender).call{value: amount}("");  
        require(success, "Couldn't transfer");
    
    }
 
+   event WithdrawReward(address sender, uint value);
    function withdrawReward(uint amount) public {
        require(_rewards[msg.sender] >= amount);
        _rewards[msg.sender] -= amount;
+       emit WithdrawReward(msg.sender, amount);
        (bool success, ) = payable(msg.sender).call{value: amount}("");  
        require(success, "Couldn't transfer");
  
@@ -54,9 +60,11 @@ contract ETHPool {
         _;
    }
 
+   event Reward(address receiver, uint value);
    function depositReward() public payable onlyTeam {
        for(uint i = 0; i < poolMembers.length; i++) {
            _rewards[poolMembers[i]] += msg.value * _deposits[poolMembers[i]] / allDeposits();
+           emit Reward(poolMembers[i], msg.value * _deposits[poolMembers[i]] / allDeposits());
        }
    }
 

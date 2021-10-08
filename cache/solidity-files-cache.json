@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/prikshetsharma/Desktop/contracts-challenge/contracts/ETHPool.sol": {
-      "lastModificationDate": 1633673677634,
-      "contentHash": "9a1b9a679d72745b9e1c255b19b1e86f",
+      "lastModificationDate": 1633676555526,
+      "contentHash": "546ac81b1b26de8afd2d057b9cd54965",
       "sourceName": "contracts/ETHPool.sol",
       "solcConfig": {
         "version": "0.8.0",
