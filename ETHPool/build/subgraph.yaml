@@ -1,0 +1,32 @@
+specVersion: 0.0.2
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: ETHPool
+    network: rinkeby
+    source:
+      address: "0xAFeeEB6F19B13C1772C4CD2c78b3211d2f3969Ed"
+      abi: ETHPool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Deposit
+        - Reward
+        - WithdrawDeposit
+        - WithdrawReward
+      abis:
+        - name: ETHPool
+          file: ETHPool/abis/ETHPool.json
+      eventHandlers:
+        - event: Deposit(address,uint256)
+          handler: handleDeposit
+        - event: Reward(address,uint256)
+          handler: handleReward
+        - event: WithdrawDeposit(address,uint256)
+          handler: handleWithdrawDeposit
+        - event: WithdrawReward(address,uint256)
+          handler: handleWithdrawReward
+      file: ETHPool/ETHPool.wasm

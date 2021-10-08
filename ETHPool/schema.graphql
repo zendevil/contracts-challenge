@@ -1,0 +1,23 @@
+type Deposit_ @entity {
+  id: ID!
+  sender: Bytes
+  value: BigInt
+}
+
+type Reward_ @entity {
+  id: ID!
+  receiver: Bytes
+  value: BigInt
+}
+
+type WithdrawDeposit_ @entity {
+  id: ID!
+  sender: Bytes
+  value: BigInt
+}
+
+type WithdrawReward_ @entity {
+  id: ID!
+  sender: Bytes
+  value: BigInt
+}
